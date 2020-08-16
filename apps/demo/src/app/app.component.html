@@ -1,0 +1,24 @@
+<header class="flex">
+  <h1>CodeThatStack - Portals Demo</h1>
+</header>
+<main>
+  <h2 class="foo" #fooLazy="ctsPortalModule" ctsPortalModule="Foo" (loaded)="onModuleLoaded('Foo')" [class.loaded]="fooLazy.isLoaded" >
+    Hover over to Load FooModule
+  </h2>
+  <h2 class="bar" #barLazy="ctsPortalModule" ctsPortalModule="Bar" (loaded)="onModuleLoaded('Foo')"  [class.loaded]="barLazy.isLoaded">
+    Hover over to Load BarModule
+  </h2>
+
+  <div>
+    <h2>Dynamically Lazy Load Components into container using Text identifier</h2>
+    <div class="cts-buttons">
+      <button (click)="componentId = 'FooComponent'">Load Foo</button>
+      <button (click)="componentId = 'BarComponent'">Load Bar</button>
+      <button (click)="componentId = 'BazComponent'">Load Baz</button>
+    </div>
+    <div class="cts-container" *ngIf="componentId" [ngClass]="componentId">
+      <ng-container [ctsComponentPortal]="componentId" (activated)="onActivated($event)" (deactivated)="onDeactivated($event)">
+      </ng-container>
+    </div>
+  </div>
+</main>
