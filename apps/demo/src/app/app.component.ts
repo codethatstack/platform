@@ -1,7 +1,7 @@
 import { Component, ComponentRef } from '@angular/core';
 
 @Component({
-  selector: 'app-lazy-root',
+  selector: 'app-root',
   templateUrl: './app.component.html',
   styleUrls: ['./app.component.scss'],
 })
