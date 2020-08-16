@@ -1,13 +1,13 @@
 {
-  "name": "code-lazy",
-  "version": "0.0.0",
+  "name": "codethatstack",
+  "version": "0.0.1",
   "license": "MIT",
   "scripts": {
     "ng": "nx",
     "postinstall": "node ./decorate-angular-cli.js && ngcc --properties es2015 browser module main --first-only --create-ivy-entry-points",
     "nx": "nx",
     "start": "ng serve",
-    "build": "ng build --project=portals",
+    "build": "ng build --project=portals --prod",
     "test": "ng test",
     "lint": "nx workspace-lint && ng lint",
     "e2e": "ng e2e",
@@ -27,7 +27,7 @@
     "dep-graph": "nx dep-graph",
     "help": "nx help"
   },
-  "private": true,
+  "private": false,
   "dependencies": {
     "@nrwl/angular": "9.5.1",
     "@angular/animations": "^9.1.0",

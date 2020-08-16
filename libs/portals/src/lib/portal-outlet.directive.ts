@@ -1,4 +1,4 @@
-import {Directive, Input, OnInit, ViewContainerRef, OnDestroy} from '@angular/core';
+import { Directive, Input, OnInit, ViewContainerRef, OnDestroy } from '@angular/core';
 import { PortalOutletRegistry } from './portal-outlet.registry';
 
 @Directive({

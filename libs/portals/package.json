@@ -2,7 +2,7 @@
   "name": "@codethatstack/portals",
   "version": "0.0.1",
   "description": "Angular portals",
-  "repository": "github:codethatstack/cqrx",
+  "repository": "github:codethatstack/platform",
   "keywords": ["angular","portal","outlet"],
   "author": "Anthony Miller",
   "license": "MIT",
