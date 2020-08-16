@@ -1,19 +1,10 @@
-import { Injectable, ViewContainerRef, ComponentRef, Injector } from '@angular/core';
+import { Injectable, ComponentRef } from '@angular/core';
 import { Observable } from 'rxjs';
 import { map } from 'rxjs/operators';
 import { ComponentResolverService } from './component-resolver.service';
 import { PortalOutletRegistry } from './portal-outlet.registry';
 import { PortalInjector } from './portal-injector';
-import { PORTAL_CONTEXT_DATA } from './portal-types';
-
-export interface CreateComponentParams {
-  componentId: string;
-  outletId?: string;
-  viewContainerRef: ViewContainerRef;
-  injector?: Injector;
-  context?: any;
-  content?: any[][];
-}
+import { PORTAL_CONTEXT_DATA, CreateComponentParams } from './portal-types';
 
 @Injectable({ providedIn: 'root' })
 export class PortalService {
@@ -41,5 +32,4 @@ export class PortalService {
         })
       );
   }
-
 }

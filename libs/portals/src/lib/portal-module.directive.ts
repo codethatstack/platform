@@ -1,4 +1,4 @@
-import { Directive, Input, HostListener, Output, EventEmitter } from '@angular/core';
+import { Directive, Input, HostListener, Output, EventEmitter, NgModuleRef } from '@angular/core';
 import { Subscription } from 'rxjs';
 import { PortalModuleRegistry } from './portal-module.registry';
 
@@ -13,19 +13,19 @@ export class PortalModuleDirective {
   private _loading: Subscription;
 
   @Input('ctsPortalModule') moduleId: string;
-  @Output() loaded = new EventEmitter<void>();
+  @Output() loaded = new EventEmitter<NgModuleRef<any>>();
 
-  constructor(private lazyModuleRegistry: PortalModuleRegistry) { }
+  constructor(private portalModuleRegistry: PortalModuleRegistry) { }
 
   @HostListener('mouseenter')
   onMouseEnter() {
     if (!this.isLoaded && !this._errorLoading && this.moduleId != null && this._loading == null) {
       // Only need to load first time mouse enters
-      this._loading = this.lazyModuleRegistry.getOrLoad(this.moduleId)
+      this._loading = this.portalModuleRegistry.getOrLoad(this.moduleId)
         .subscribe(
           module => {
             this.isLoaded = true;
-            this.loaded.emit();
+            this.loaded.emit(module);
           },
           err => { this._errorLoading = true }
         );

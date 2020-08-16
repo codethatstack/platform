@@ -1,9 +1,15 @@
 {
   "name": "@codethatstack/portals",
   "version": "0.0.1",
+  "description": "Angular portals",
+  "repository": "github:codethatstack/cqrx",
+  "keywords": ["angular","portal","outlet"],
+  "author": "Anthony Miller",
+  "license": "MIT",
   "peerDependencies": {
     "@angular/common": "^9.1.11",
-    "@angular/core": "^9.1.11"
+    "@angular/core": "^9.1.11",
+    "rxjs": "~6.5.4"
   },
   "dependencies": {
     "tslib": "^1.10.0"

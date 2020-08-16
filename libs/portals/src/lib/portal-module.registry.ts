@@ -27,9 +27,7 @@ export class PortalModuleRegistry {
   }
 
   public getOrLoad(moduleDef: ModuleRegistryType, localInjector?: Injector): Observable<NgModuleRef<any>> {
-
     return new Observable(subscriber => {
-
       if (moduleDef instanceof NgModuleRef) {
         subscriber.next(moduleDef);
         subscriber.complete();

@@ -1,4 +1,4 @@
-import { NgModuleFactory, Type, NgModuleRef, InjectionToken } from '@angular/core';
+import { NgModuleFactory, Type, NgModuleRef, InjectionToken, ViewContainerRef, Injector } from '@angular/core';
 
 export const PORTAL_MODULE_TOKEN = new InjectionToken<ModuleLoaderDef[]>('Portal Modules');
 export const PORTAL_COMPONENTS_TOKEN = new InjectionToken<ComponentRegistryItem[]>('Portal Components');
@@ -19,4 +19,13 @@ export interface ComponentRegistryItem {
   componentType?: Type<any>;
   moduleId?: ModuleRegistryType;
   module?: NgModuleRef<any>;
+}
+
+export interface CreateComponentParams {
+  componentId: string;
+  outletId?: string;
+  viewContainerRef: ViewContainerRef;
+  injector?: Injector;
+  context?: any;
+  content?: any[][];
 }
