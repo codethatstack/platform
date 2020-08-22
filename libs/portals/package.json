@@ -1,0 +1,31 @@
+{
+  "name": "@codethatstack/portals",
+  "version": "0.0.2",
+  "description": "Angular portals",
+  "repository": "github:codethatstack/platform",
+  "keywords": [
+    "angular",
+    "portal",
+    "outlet"
+  ],
+  "author": "Anthony Miller",
+  "license": "MIT",
+  "peerDependencies": {
+    "@angular/common": ">=8.x.x-10.x.x",
+    "@angular/core": ">=8.x.x-10.x.x",
+    "rxjs": "~6.5.4"
+  },
+  "dependencies": {
+    "tslib": "^1.10.0"
+  },
+  "main": "bundles/codethatstack-portals.umd.js",
+  "module": "fesm5/codethatstack-portals.js",
+  "es2015": "fesm2015/codethatstack-portals.js",
+  "esm5": "esm5/codethatstack-portals.js",
+  "esm2015": "esm2015/codethatstack-portals.js",
+  "fesm5": "fesm5/codethatstack-portals.js",
+  "fesm2015": "fesm2015/codethatstack-portals.js",
+  "typings": "codethatstack-portals.d.ts",
+  "metadata": "codethatstack-portals.metadata.json",
+  "sideEffects": false
+}
