@@ -2,8 +2,10 @@
 
 Component Portals provides the ability to lazily load a NgModule and instantiate any component contained within any module without a direct reference to the component's underlying type.
 
-# Getting Started
+## See it in action <a href="https://codethatstack.github.io/platform/" target="_blank">here</a>
 
+
+# Getting Started
 
 ## Step 1: Install
 
