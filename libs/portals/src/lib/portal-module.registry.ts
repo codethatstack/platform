@@ -13,7 +13,7 @@ export class PortalModuleRegistry {
     @Optional() @Inject(PORTAL_MODULE_TOKEN) lazyModules: ModuleLoaderDef[],
     private injector: Injector,
     private compiler: Compiler,
-    @Optional() private moduleLoader: NgModuleFactoryLoader) {
+    @Optional() private moduleLoader?: NgModuleFactoryLoader) {
 
     if (lazyModules != null) {
       this.register(lazyModules);
@@ -24,6 +24,10 @@ export class PortalModuleRegistry {
     moduleLoaderDefs.forEach(value => {
       this._registry.set(value.moduleId, value);
     });
+  }
+
+  public exists(moduleId: string): boolean {
+    return this._registry.has(moduleId);
   }
 
   public getOrLoad(moduleDef: ModuleRegistryType, localInjector?: Injector): Observable<NgModuleRef<any>> {
@@ -74,7 +78,9 @@ export class PortalModuleRegistry {
       }
 
       const factory$ = loader$.pipe(
-          map((factory: NgModuleFactory<any>) => factory.create(localInjector || this.injector)),
+          map((factory: NgModuleFactory<any>) => {
+            return factory.create(localInjector || this.injector)
+          }),
           tap(ngModuleRef => this._cache.set(moduleId, ngModuleRef)));
 
       this._cache.set(moduleId, factory$);

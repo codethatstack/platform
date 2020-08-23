@@ -1,14 +1,17 @@
 import { TestBed, async } from '@angular/core/testing';
 import { AppComponent } from './app.component';
+import { CtsPortalsModule } from '@codethatstack/portals';
 
 describe('AppComponent', () => {
   beforeEach(async(() => {
     TestBed.configureTestingModule({
       declarations: [AppComponent],
+      imports: [CtsPortalsModule]
     }).compileComponents();
   }));
 
   it('should create the app', () => {
+    console.log('Running Test');
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
     expect(app).toBeTruthy();
@@ -25,7 +28,7 @@ describe('AppComponent', () => {
     fixture.detectChanges();
     const compiled = fixture.nativeElement;
     expect(compiled.querySelector('h1').textContent).toContain(
-      'Welcome to demo!'
+      'CodeThatStack - Portals Demo'
     );
   });
 });
