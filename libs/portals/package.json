@@ -1,6 +1,6 @@
 {
   "name": "@codethatstack/portals",
-  "version": "0.0.2",
+  "version": "0.0.4",
   "description": "Angular portals",
   "repository": "github:codethatstack/platform",
   "keywords": ["angular","portal","outlet"],

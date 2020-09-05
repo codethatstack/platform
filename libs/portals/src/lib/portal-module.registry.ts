@@ -1,19 +1,20 @@
 import { Injectable, NgModuleRef, Injector, Compiler, NgModuleFactoryLoader, NgModuleFactory, Optional, Inject } from '@angular/core';
 import { Observable, isObservable, from, of } from 'rxjs';
 import { map, tap, switchMap } from 'rxjs/operators';
-import { ModuleLoaderDef, ModuleRegistryType, PORTAL_MODULE_TOKEN } from './portal-types';
+import { ModuleLoaderDef, ModuleRegistryType, PORTAL_MODULE_TOKEN, PORTAL_MODULE_FACTORY_LOADER } from './portal-types';
 
 @Injectable({ providedIn: 'root' })
 export class PortalModuleRegistry {
 
   private _registry = new Map<string, ModuleLoaderDef>();
   private _cache = new Map<string, any>();
+  private _compiler: Compiler;
+  // tslint:disable-next-line: deprecation
+  private _moduleLoader: NgModuleFactoryLoader
 
   constructor(
     @Optional() @Inject(PORTAL_MODULE_TOKEN) lazyModules: ModuleLoaderDef[],
-    private injector: Injector,
-    private compiler: Compiler,
-    @Optional() private moduleLoader: NgModuleFactoryLoader) {
+    private injector: Injector) {
 
     if (lazyModules != null) {
       this.register(lazyModules);
@@ -63,14 +64,14 @@ export class PortalModuleRegistry {
               if (moduleOrFactory instanceof NgModuleFactory) {
                 return of(moduleOrFactory);
               }
-              return from(this.compiler.compileModuleAsync(moduleOrFactory));
+              return from(this.getCompiler().compileModuleAsync(moduleOrFactory));
             }),
           );
 
       } else {
         /** Deprecated */
         const pathAndModule = `${moduleDef['path']}#${moduleDef['name']}`;
-        loader$ = from(this.moduleLoader.load(pathAndModule));
+        loader$ = from(this.getModuleLoader().load(pathAndModule));
       }
 
       const factory$ = loader$.pipe(
@@ -87,6 +88,22 @@ export class PortalModuleRegistry {
       return moduleDef;
     }
     return moduleDef['moduleId'] ?? moduleDef['name'];
+  }
+
+  private getCompiler(): Compiler {
+    if (this._compiler == null) {
+      this._compiler = this.injector.get<Compiler>(Compiler);
+    }
+    return this._compiler;
+  }
+
+  // tslint:disable-next-line: deprecation
+  private getModuleLoader(): NgModuleFactoryLoader {
+    if (this._moduleLoader == null) {
+      // tslint:disable-next-line: deprecation
+      this._moduleLoader = this.injector.get<NgModuleFactoryLoader>(PORTAL_MODULE_FACTORY_LOADER);
+    }
+    return this._moduleLoader;
   }
 
 }

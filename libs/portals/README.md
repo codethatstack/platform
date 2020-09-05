@@ -184,3 +184,47 @@ Eagerly load the NgModule on hover of some element to reduce lazy component load
   </div>
 
 ```
+
+## Version 8 and prior support
+
+If the version of Angular does not include the usage of the `import('./bar/bar.module').then(m => m.BarModule)` follow these steps:
+
+Register Component:
+
+```typescript
+const PortalComponents: ComponentRegistryItem[] = [
+  {
+    componentId: 'BarComponent',
+    moduleId: {
+      name: 'BarModule',              /** <-- Name of NgModule -> */
+      path: 'src/app/bar/bar.module'  /** <-- Full path to NgModule */
+    }
+  },
+  ...
+];
+```
+
+Need to instruct Angular that there is a lazy module, open angular.json file and add the following:
+
+Add the module to the list of lazyModules references.
+
+```json
+{
+  ...
+  "projects": {
+    "angular-dynamic-content": {
+      ...
+      "architect": {
+        "build": {
+          "builder": "@angular-devkit/build-angular:browser",
+          "options": {
+            ...
+            "lazyModules": ["src/app/bar/bar.module"] /** <-- Full path to NgModule */
+          },
+        }
+      }
+    }
+  }
+}
+
+```
